@@ -502,3 +502,24 @@ CREATE INDEX IDX_QRTZ_FT_J_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROU
 CREATE INDEX IDX_QRTZ_FT_JG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_GROUP);
 CREATE INDEX IDX_QRTZ_FT_T_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);
 CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
+-- PLC设备管理
+CREATE TABLE plc_device (
+  id bigint NOT NULL COMMENT 'id',
+  device_name varchar(100) NOT NULL COMMENT '设备名称',
+  device_code varchar(50) NOT NULL COMMENT '设备编码（唯一）',
+  protocol varchar(20) NOT NULL COMMENT '协议类型：modbus-tcp、s7',
+  host varchar(100) NOT NULL COMMENT 'PLC连接地址（IP或主机名）',
+  port int DEFAULT NULL COMMENT '端口号（Modbus默认502，S7默认102）',
+  rack int DEFAULT NULL COMMENT 'S7协议机架号（默认0）',
+  slot int DEFAULT NULL COMMENT 'S7协议槽号（默认0）',
+  status tinyint NOT NULL DEFAULT 1 COMMENT '设备状态：0-停用，1-启用',
+  connect_timeout int DEFAULT 5000 COMMENT '连接超时时间（毫秒）',
+  remark varchar(500) DEFAULT NULL COMMENT '备注',
+  creator bigint COMMENT '创建者',
+  create_date datetime COMMENT '创建时间',
+  updater bigint COMMENT '更新者',
+  update_date datetime COMMENT '更新时间',
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_device_code (device_code),
+  KEY idx_create_date (create_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='PLC设备管理';
