@@ -697,3 +697,39 @@ create index idx_qrtz_ft_tg on qrtz_fired_triggers(SCHED_NAME,TRIGGER_GROUP);
 
 
 commit;
+
+-- PLC设备管理
+CREATE TABLE plc_device (
+  id bigint NOT NULL,
+  device_name varchar(100) NOT NULL,
+  device_code varchar(50) NOT NULL,
+  protocol varchar(20) NOT NULL,
+  host varchar(100) NOT NULL,
+  port integer,
+  rack integer,
+  slot integer,
+  status smallint NOT NULL DEFAULT 1,
+  connect_timeout integer DEFAULT 5000,
+  remark varchar(500),
+  creator bigint,
+  create_date timestamp,
+  updater bigint,
+  update_date timestamp,
+  PRIMARY KEY (id),
+  CONSTRAINT uk_plc_device_code UNIQUE (device_code)
+);
+COMMENT ON TABLE plc_device IS 'PLC设备管理';
+COMMENT ON COLUMN plc_device.id IS 'id';
+COMMENT ON COLUMN plc_device.device_name IS '设备名称';
+COMMENT ON COLUMN plc_device.device_code IS '设备编码（唯一）';
+COMMENT ON COLUMN plc_device.protocol IS '协议类型：modbus-tcp、s7';
+COMMENT ON COLUMN plc_device.host IS 'PLC连接地址（IP或主机名）';
+COMMENT ON COLUMN plc_device.port IS '端口号（Modbus默认502，S7默认102）';
+COMMENT ON COLUMN plc_device.rack IS 'S7协议机架号（默认0）';
+COMMENT ON COLUMN plc_device.slot IS 'S7协议槽号（默认0）';
+COMMENT ON COLUMN plc_device.status IS '设备状态：0-停用，1-启用';
+COMMENT ON COLUMN plc_device.connect_timeout IS '连接超时时间（毫秒）';
+COMMENT ON COLUMN plc_device.remark IS '备注';
+CREATE INDEX idx_plc_device_create_date ON plc_device(create_date);
+
+commit;

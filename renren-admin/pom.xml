@@ -31,6 +31,24 @@
 			<artifactId>renren-dynamic-datasource</artifactId>
 			<version>5.5.0</version>
 		</dependency>
+		<!-- PLC4X: PLC通讯框架 -->
+		<dependency>
+			<groupId>org.apache.plc4x</groupId>
+			<artifactId>plc4j-api</artifactId>
+			<version>${plc4x.version}</version>
+		</dependency>
+		<!-- Modbus TCP/RTU 驱动 -->
+		<dependency>
+			<groupId>org.apache.plc4x</groupId>
+			<artifactId>plc4j-driver-modbus</artifactId>
+			<version>${plc4x.version}</version>
+		</dependency>
+		<!-- Siemens S7 驱动 -->
+		<dependency>
+			<groupId>org.apache.plc4x</groupId>
+			<artifactId>plc4j-driver-s7</artifactId>
+			<version>${plc4x.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
