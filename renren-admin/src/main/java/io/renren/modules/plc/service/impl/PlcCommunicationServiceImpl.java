@@ -57,7 +57,7 @@ public class PlcCommunicationServiceImpl implements PlcCommunicationService {
         PlcDeviceEntity device = getEnabledDevice(request.getDeviceId());
         PlcConnection connection = getOrCreateConnection(device);
 
-        if (!connection.getMetadata().canRead()) {
+        if (!connection.getMetadata().isReadSupported()) {
             throw new RenException("该PLC设备不支持读取操作，协议：" + device.getProtocol());
         }
 
@@ -91,7 +91,7 @@ public class PlcCommunicationServiceImpl implements PlcCommunicationService {
         PlcDeviceEntity device = getEnabledDevice(request.getDeviceId());
         PlcConnection connection = getOrCreateConnection(device);
 
-        if (!connection.getMetadata().canWrite()) {
+        if (!connection.getMetadata().isWriteSupported()) {
             throw new RenException("该PLC设备不支持写入操作，协议：" + device.getProtocol());
         }
 
@@ -165,7 +165,7 @@ public class PlcCommunicationServiceImpl implements PlcCommunicationService {
         String connectionUrl = buildConnectionUrl(device);
         log.info("正在连接PLC设备[{}]，URL：{}", device.getDeviceCode(), connectionUrl);
         try {
-            PlcConnection connection = PlcDriverManager.getDefault().getConnection(connectionUrl);
+            PlcConnection connection = PlcDriverManager.getDefault().getConnectionManager().getConnection(connectionUrl);
             if (!connection.isConnected()) {
                 throw new RenException("PLC连接建立后状态为未连接，URL：" + connectionUrl);
             }
