@@ -2,10 +2,10 @@ spring:
   datasource:
     druid:
       #MySQL
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/renren_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-      username: renren
-      password: 123456
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://localhost:3306/renren_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+#      username: renren
+#      password: 123456
       #达梦8
 #      driver-class-name: dm.jdbc.driver.DmDriver
 #      url: jdbc:dm://192.168.10.10:5236/renren_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
@@ -21,11 +21,11 @@ spring:
       #      url: jdbc:sqlserver://localhost:1433;DatabaseName=renren_security
       #      username: sa
       #      password: 123456
-      #      #postgresql
-      #      driver-class-name: org.postgresql.Driver
-      #      url: jdbc:postgresql://192.168.10.10:5432/postgres
-      #      username: postgres
-      #      password: 123456
+      #postgresql
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://12.0.0.235:5432/wcs_project?enableSSL=false&stringtype=unspecified
+      username: postgres
+      password: Yuangu305
       initial-size: 10
       max-active: 100
       min-idle: 10
